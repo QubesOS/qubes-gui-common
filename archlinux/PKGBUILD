@@ -1,0 +1,50 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Olivier Medoc <o_medoc@yahoo.fr>
+pkgname=qubes-vm-gui-common
+pkgver=`cat version`
+pkgrel=1
+epoch=
+pkgdesc="Common files for Qubes GUI - protocol headers."
+arch=("x86_64")
+url="http://qubes-os.org/"
+license=('GPL')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+
+source=()
+
+noextract=()
+md5sums=() #generate with 'makepkg -g'
+
+
+build() {
+
+for source in include ; do
+  (ln -s $srcdir/../$source $srcdir/$source)
+done
+
+}
+
+package() {
+
+mkdir -p $pkgdir/usr/include
+cp include/*.h $pkgdir/usr/include/
+
+}
+
+# vim:set ts=2 sw=2 et:
+
