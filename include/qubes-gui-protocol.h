@@ -46,7 +46,7 @@ typedef unsigned __int32 uint32_t;
 //not arbitrary
 #define DUMMY_DRV_FB_BPP 32
 #define SIZEOF_SHARED_MFN (sizeof(((struct shm_cmd*)0)->mfns[0]))
-#define MAX_WINDOW_MEM (MAX_WINDOW_HEIGHT*MAX_WINDOW_WIDTH*DUMMY_DRV_FB_BPP/8)
+#define MAX_WINDOW_MEM (MAX_WINDOW_HEIGHT*MAX_WINDOW_WIDTH*(DUMMY_DRV_FB_BPP/8))
 #define NUM_PAGES(x) ((x+4095)>>12)
 //finally, used stuff
 #define MAX_MFN_COUNT NUM_PAGES(MAX_WINDOW_MEM)
