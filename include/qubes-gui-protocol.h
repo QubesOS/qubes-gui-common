@@ -40,8 +40,8 @@ typedef unsigned __int32 uint32_t;
 
 //arbitrary
 #define MAX_CLIPBOARD_SIZE 65000
-#define MAX_WINDOW_WIDTH 8192
-#define MAX_WINDOW_HEIGHT 3072
+#define MAX_WINDOW_WIDTH 16384
+#define MAX_WINDOW_HEIGHT 6144
 
 //not arbitrary
 #define DUMMY_DRV_FB_BPP 32
