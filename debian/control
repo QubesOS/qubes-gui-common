@@ -1,0 +1,15 @@
+Source: qubes-gui-common
+Section: admin
+Priority: extra
+Maintainer: Davíð Steinn Geirsson <david@dsg.is>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: <http://www.qubes-os.org/>
+Vcs-Git: http://dsg.is/qubes/qubes-gui-common.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/qubes-gui-common.git;a=summary
+
+Package: qubes-gui-common
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qubes GUI common files
+ This package contains common files used by Qubes GUI software.

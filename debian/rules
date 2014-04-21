@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export DESTDIR=$(shell pwd)/debian/qubes-gui-common
+
+%:
+	dh $@ 
+
+override_dh_auto_install:
+	install -D include/qubes-gui-protocol.h $(DESTDIR)/usr/include/qubes-gui-protocol.h
+	install -D include/qubes-xorg-tray-defs.h $(DESTDIR)/usr/include/qubes-xorg-tray-defs.h
+
