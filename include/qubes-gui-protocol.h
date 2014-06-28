@@ -200,6 +200,7 @@ struct msg_window_flags {
 };
 #define WINDOW_FLAG_FULLSCREEN			(1<<0)
 #define WINDOW_FLAG_DEMANDS_ATTENTION	(1<<1)
+#define WINDOW_FLAG_MINIMIZE			(1<<2)
 
 /* VM -> Dom0 */
 struct shm_cmd {
