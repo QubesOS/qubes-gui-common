@@ -1,3 +1,14 @@
+qubes-gui-common (2.0.4) jessie; urgency=medium
+
+  [ Marek Marczykowski-Górecki ]
+  * Introduce WINDOW_FLAG_MINIMIZE for msg_window_flags
+  * version 2.0.3
+
+  [ Davíð Steinn Geirsson ]
+  * Initial debian packaging
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Mon, 28 Jul 2014 02:47:26 +0200
+
 qubes-gui-common (2.0.2) jessie; urgency=low
 
   * Initial Release.
