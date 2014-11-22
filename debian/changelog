@@ -7,7 +7,7 @@ qubes-gui-common (2.0.4) jessie; urgency=medium
   [ Davíð Steinn Geirsson ]
   * Initial debian packaging
 
- -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Mon, 28 Jul 2014 02:47:26 +0200
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sat, 22 Nov 2014 16:59:11 +0100
 
 qubes-gui-common (2.0.2) jessie; urgency=low
 
