@@ -1,3 +1,10 @@
+qubes-gui-common (3.0.0) jessie; urgency=medium
+
+  [ Marek Marczykowski-Górecki ]
+  * version 3.0.0
+
+ -- Jason Mehring <nrgaway@gmail.com>  Thu, 12 Mar 2015 04:03:33 -0400
+
 qubes-gui-common (2.0.4) jessie; urgency=medium
 
   [ Marek Marczykowski-Górecki ]
