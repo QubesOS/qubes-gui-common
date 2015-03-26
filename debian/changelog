@@ -1,3 +1,10 @@
+qubes-gui-common (3.0.1) wheezy; urgency=medium
+
+  [ Jason Mehring ]
+  * debian: Update changelog version to 3.0.0
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Fri, 27 Mar 2015 00:29:18 +0100
+
 qubes-gui-common (3.0.0) jessie; urgency=medium
 
   [ Marek Marczykowski-Górecki ]
