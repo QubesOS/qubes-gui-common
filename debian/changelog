@@ -1,3 +1,9 @@
+qubes-gui-common (3.0.2) wheezy; urgency=medium
+
+  * rpm: fix file permissions of packaged files
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sat, 04 Apr 2015 22:05:43 +0200
+
 qubes-gui-common (3.0.1) wheezy; urgency=medium
 
   [ Jason Mehring ]
