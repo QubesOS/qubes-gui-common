@@ -47,6 +47,7 @@ mkdir -p %{buildroot}/usr/include
 cp include/*.h %{buildroot}/usr/include/
 
 %files
+%defattr(644,root,root,-)
 /usr/include/qubes-gui-protocol.h
 /usr/include/qubes-xorg-tray-defs.h
 
