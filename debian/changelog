@@ -1,3 +1,10 @@
+qubes-gui-common (3.0.3) wheezy; urgency=medium
+
+  [ Rafał Wojdyła ]
+  * windows: don't invoke any compiler
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Thu, 03 Sep 2015 02:45:59 +0200
+
 qubes-gui-common (3.0.2) wheezy; urgency=medium
 
   * rpm: fix file permissions of packaged files
