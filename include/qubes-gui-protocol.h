@@ -86,6 +86,7 @@ enum {
 	MSG_DOCK, // 143
 	MSG_WINDOW_HINTS,
 	MSG_WINDOW_FLAGS,
+	MSG_WMCLASS,
 	MSG_MAX
 };
 /* VM -> Dom0, Dom0 -> VM */
@@ -212,6 +213,11 @@ struct shm_cmd {
 	uint32_t num_mfn;
 	uint32_t domid;
 	uint32_t mfns[0];
+};
+/* VM -> Dom0 */
+struct msg_wmclass {
+	char res_class[64];
+	char res_name[64];
 };
 
 #endif /* _QUBES_GUI_PROTOCOL_H */
