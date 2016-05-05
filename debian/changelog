@@ -1,3 +1,10 @@
+qubes-gui-common (3.2.0) wheezy; urgency=medium
+
+  * Add MSG_WMCLASS message
+  * GUI Protocol version 1:1
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Thu, 05 May 2016 02:27:50 +0200
+
 qubes-gui-common (3.0.3) wheezy; urgency=medium
 
   [ Rafał Wojdyła ]
