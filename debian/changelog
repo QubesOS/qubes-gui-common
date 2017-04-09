@@ -1,3 +1,11 @@
+qubes-gui-common (4.0.0) unstable; urgency=medium
+
+  * travis: initial version
+  * travis: drop debootstrap workaround
+  * travis: update for Qubes 4.0
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sun, 09 Apr 2017 13:51:05 +0200
+
 qubes-gui-common (3.2.0) wheezy; urgency=medium
 
   * Add MSG_WMCLASS message
