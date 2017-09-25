@@ -23,7 +23,7 @@
 #define _QUBES_GUI_PROTOCOL_H
 
 /* Messagess are described here:
- * http://wiki.qubes-os.org/trac/wiki/GUIdocs
+ * https://www.qubes-os.org/doc/gui/
  */
 
 #ifdef WINNT
