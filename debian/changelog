@@ -1,3 +1,9 @@
+qubes-gui-common (4.0.1) unstable; urgency=medium
+
+  * Fix link to documentation
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Tue, 26 Sep 2017 23:17:27 +0200
+
 qubes-gui-common (4.0.0) unstable; urgency=medium
 
   * travis: initial version
