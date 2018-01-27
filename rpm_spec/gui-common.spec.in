@@ -21,11 +21,8 @@
 #
 #
 
-%{!?version: %define version %(cat version)}
-
-
 Name:		qubes-gui-common-devel
-Version:	%{version}
+Version:	@VERSION@
 Release:	1%{?dist}
 Summary:	Common files for Qubes GUI - protocol headers
 
@@ -33,14 +30,14 @@ Group:		Qubes
 License:	GPL
 URL:		http://www.qubes-os.org
 
-%define _builddir %(pwd)
+Source0: %{name}-%{version}.tar.gz
 
 %description
 Protocol description headers for Qubes GUI
 
 %prep
 
-%build
+%setup -q
 
 %install
 mkdir -p %{buildroot}/usr/include
