@@ -35,7 +35,7 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 1
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 2
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 //arbitrary
@@ -51,6 +51,11 @@ typedef unsigned __int32 uint32_t;
 //finally, used stuff
 #define MAX_MFN_COUNT NUM_PAGES(MAX_WINDOW_MEM)
 #define SHM_CMD_NUM_PAGES NUM_PAGES(MAX_MFN_COUNT*SIZEOF_SHARED_MFN+sizeof(struct shm_cmd))
+
+#define MSG_WINDOW_DUMP_HDR_LEN sizeof(struct msg_window_dump_hdr)
+
+#define MAX_GRANT_REFS_COUNT NUM_PAGES(MAX_WINDOW_MEM)
+#define SIZEOF_GRANT_REF sizeof(uint32_t)
 
 struct msg_hdr {
 	uint32_t type;
@@ -87,6 +92,7 @@ enum {
 	MSG_WINDOW_HINTS,
 	MSG_WINDOW_FLAGS,
 	MSG_WMCLASS,
+        MSG_WINDOW_DUMP,
 	MSG_MAX
 };
 /* VM -> Dom0, Dom0 -> VM */
@@ -203,7 +209,7 @@ struct msg_window_flags {
 #define WINDOW_FLAG_DEMANDS_ATTENTION	(1<<1)
 #define WINDOW_FLAG_MINIMIZE			(1<<2)
 
-/* VM -> Dom0 */
+/* VM -> Dom0, deprecated */
 struct shm_cmd {
 	uint32_t shmid;
 	uint32_t width;
@@ -218,6 +224,22 @@ struct shm_cmd {
 struct msg_wmclass {
 	char res_class[64];
 	char res_name[64];
+};
+
+/* VM -> Dom0, hdr followed by msg_window_dump_${hdr.type} */
+struct msg_window_dump_hdr {
+    uint32_t type;
+    uint32_t width;
+    uint32_t height;
+    uint32_t bpp;
+};
+
+enum {
+    WINDOW_DUMP_TYPE_GRANT_REFS
+};
+
+struct msg_window_dump_grant_refs {
+    uint32_t refs[0];
 };
 
 #endif /* _QUBES_GUI_PROTOCOL_H */
