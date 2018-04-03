@@ -49,4 +49,4 @@ cp include/*.h %{buildroot}/usr/include/
 /usr/include/qubes-xorg-tray-defs.h
 
 %changelog
-
+@CHANGELOG@
