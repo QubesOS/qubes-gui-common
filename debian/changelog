@@ -1,3 +1,15 @@
+qubes-gui-common (4.0.2) unstable; urgency=medium
+
+  [ Frédéric Pierret ]
+  * Create .spec.in and Source0
+  * spec.in: add changelog placeholder
+
+  [ Marek Marczykowski-Górecki ]
+  * travis: update fedora versions
+  * travis: add centos7
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Wed, 02 May 2018 18:34:40 +0200
+
 qubes-gui-common (4.0.1) unstable; urgency=medium
 
   * Fix link to documentation
