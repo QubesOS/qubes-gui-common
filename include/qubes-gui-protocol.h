@@ -58,172 +58,172 @@ typedef unsigned __int32 uint32_t;
 #define SIZEOF_GRANT_REF sizeof(uint32_t)
 
 struct msg_hdr {
-	uint32_t type;
-	uint32_t window;
-	/* This field is intended for use by gui_agents to skip unknown
-	 * messages from the (trusted) guid. Guid, on the other hand,
-	 * should never rely on this field to calculate the actual len of
-	 * message to be read, as the (untrusted) agent can put here
-	 * whatever it wants! */
-	uint32_t untrusted_len; // NEVER trust this field!
+    uint32_t type;
+    uint32_t window;
+    /* This field is intended for use by gui_agents to skip unknown
+     * messages from the (trusted) guid. Guid, on the other hand,
+     * should never rely on this field to calculate the actual len of
+     * message to be read, as the (untrusted) agent can put here
+     * whatever it wants! */
+    uint32_t untrusted_len; // NEVER trust this field!
 };
 enum {
-	MSG_MIN = 123,
-	MSG_KEYPRESS,
-	MSG_BUTTON,
-	MSG_MOTION,
-	MSG_CROSSING,
-	MSG_FOCUS,
-	MSG_RESIZE,
-	MSG_CREATE,
-	MSG_DESTROY,
-	MSG_MAP,
-	MSG_UNMAP, // 133
-	MSG_CONFIGURE,
-	MSG_MFNDUMP,
-	MSG_SHMIMAGE,
-	MSG_CLOSE,
-	MSG_EXECUTE,
-	MSG_CLIPBOARD_REQ,
-	MSG_CLIPBOARD_DATA,
-	MSG_WMNAME,
-	MSG_KEYMAP_NOTIFY,
-	MSG_DOCK, // 143
-	MSG_WINDOW_HINTS,
-	MSG_WINDOW_FLAGS,
-	MSG_WMCLASS,
-        MSG_WINDOW_DUMP,
-	MSG_MAX
+    MSG_MIN = 123,
+    MSG_KEYPRESS,
+    MSG_BUTTON,
+    MSG_MOTION,
+    MSG_CROSSING,
+    MSG_FOCUS,
+    MSG_RESIZE,
+    MSG_CREATE,
+    MSG_DESTROY,
+    MSG_MAP,
+    MSG_UNMAP, // 133
+    MSG_CONFIGURE,
+    MSG_MFNDUMP,
+    MSG_SHMIMAGE,
+    MSG_CLOSE,
+    MSG_EXECUTE,
+    MSG_CLIPBOARD_REQ,
+    MSG_CLIPBOARD_DATA,
+    MSG_WMNAME,
+    MSG_KEYMAP_NOTIFY,
+    MSG_DOCK, // 143
+    MSG_WINDOW_HINTS,
+    MSG_WINDOW_FLAGS,
+    MSG_WMCLASS,
+    MSG_WINDOW_DUMP,
+    MSG_MAX
 };
 /* VM -> Dom0, Dom0 -> VM */
 struct msg_map_info {
-	uint32_t transient_for;
-	uint32_t override_redirect;
+    uint32_t transient_for;
+    uint32_t override_redirect;
 };
 
 /* VM -> Dom0 */
 struct msg_create {
-	uint32_t x;
-	uint32_t y;
-	uint32_t width;
-	uint32_t height;	/* size of image */
-	uint32_t parent;
-	uint32_t override_redirect;
+    uint32_t x;
+    uint32_t y;
+    uint32_t width;
+    uint32_t height;    /* size of image */
+    uint32_t parent;
+    uint32_t override_redirect;
 };
 /* Dom0 -> VM, obsolete */
 struct msg_resize {
-	uint32_t width;
-	uint32_t height;	/* size of image */
+    uint32_t width;
+    uint32_t height;    /* size of image */
 };
 /* Dom0 -> VM */
 struct msg_keypress {
-	uint32_t type;
-	uint32_t x;
-	uint32_t y;
-	uint32_t state;
-	uint32_t keycode;
+    uint32_t type;
+    uint32_t x;
+    uint32_t y;
+    uint32_t state;
+    uint32_t keycode;
 };
 /* Dom0 -> VM */
 struct msg_button {
-	uint32_t type;
-	uint32_t x;
-	uint32_t y;
-	uint32_t state;
-	uint32_t button;
+    uint32_t type;
+    uint32_t x;
+    uint32_t y;
+    uint32_t state;
+    uint32_t button;
 };
 /* Dom0 -> VM */
 struct msg_motion {
-	uint32_t x;
-	uint32_t y;
-	uint32_t state;
-	uint32_t is_hint;
+    uint32_t x;
+    uint32_t y;
+    uint32_t state;
+    uint32_t is_hint;
 };
 /* Dom0 -> VM */
 struct msg_crossing {
-	uint32_t type;
-	uint32_t x;
-	uint32_t y;
-	uint32_t state;
-	uint32_t mode;
-	uint32_t detail;
-	uint32_t focus;
+    uint32_t type;
+    uint32_t x;
+    uint32_t y;
+    uint32_t state;
+    uint32_t mode;
+    uint32_t detail;
+    uint32_t focus;
 };
 /* VM -> Dom0, Dom0 -> VM */
 struct msg_configure {
-	uint32_t x;
-	uint32_t y;
-	uint32_t width;
-	uint32_t height;
-	uint32_t override_redirect;
+    uint32_t x;
+    uint32_t y;
+    uint32_t width;
+    uint32_t height;
+    uint32_t override_redirect;
 };
 /* VM -> Dom0 */
 struct msg_shmimage {
-	uint32_t x;
-	uint32_t y;
-	uint32_t width;
-	uint32_t height;
+    uint32_t x;
+    uint32_t y;
+    uint32_t width;
+    uint32_t height;
 };
 /* Dom0 -> VM */
 struct msg_focus {
-	uint32_t type;
-	uint32_t mode;
-	uint32_t detail;
+    uint32_t type;
+    uint32_t mode;
+    uint32_t detail;
 };
 /* Dom0 -> VM */
 struct msg_execute {
-	char cmd[255];
+    char cmd[255];
 };
 /* Dom0 -> VM */
 struct msg_xconf {
-	uint32_t w;
-	uint32_t h;
-	uint32_t depth;
-	uint32_t mem;
+    uint32_t w;
+    uint32_t h;
+    uint32_t depth;
+    uint32_t mem;
 };
 /* VM -> Dom0 */
 struct msg_wmname {
-	char data[128];
+    char data[128];
 };
 /* Dom0 -> VM */
 struct msg_keymap_notify {
-	char keys[32];
+    char keys[32];
 };
 /* VM -> Dom0 */
 struct msg_window_hints {
-	uint32_t flags;
-	uint32_t min_width;
-	uint32_t min_height;
-	uint32_t max_width;
-	uint32_t max_height;
-	uint32_t width_inc;
-	uint32_t height_inc;
-	uint32_t base_width;
-	uint32_t base_height;
+    uint32_t flags;
+    uint32_t min_width;
+    uint32_t min_height;
+    uint32_t max_width;
+    uint32_t max_height;
+    uint32_t width_inc;
+    uint32_t height_inc;
+    uint32_t base_width;
+    uint32_t base_height;
 };
 /* VM -> Dom0, Dom0 -> VM */
 struct msg_window_flags {
-	uint32_t flags_set;
-	uint32_t flags_unset;
+    uint32_t flags_set;
+    uint32_t flags_unset;
 };
-#define WINDOW_FLAG_FULLSCREEN			(1<<0)
-#define WINDOW_FLAG_DEMANDS_ATTENTION	(1<<1)
-#define WINDOW_FLAG_MINIMIZE			(1<<2)
+#define WINDOW_FLAG_FULLSCREEN          (1<<0)
+#define WINDOW_FLAG_DEMANDS_ATTENTION   (1<<1)
+#define WINDOW_FLAG_MINIMIZE            (1<<2)
 
 /* VM -> Dom0, deprecated */
 struct shm_cmd {
-	uint32_t shmid;
-	uint32_t width;
-	uint32_t height;
-	uint32_t bpp;
-	uint32_t off;
-	uint32_t num_mfn;
-	uint32_t domid;
-	uint32_t mfns[0];
+    uint32_t shmid;
+    uint32_t width;
+    uint32_t height;
+    uint32_t bpp;
+    uint32_t off;
+    uint32_t num_mfn;
+    uint32_t domid;
+    uint32_t mfns[0];
 };
 /* VM -> Dom0 */
 struct msg_wmclass {
-	char res_class[64];
-	char res_name[64];
+    char res_class[64];
+    char res_name[64];
 };
 
 /* VM -> Dom0, hdr followed by msg_window_dump_${hdr.type} */
