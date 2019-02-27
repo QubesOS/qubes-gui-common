@@ -1,3 +1,13 @@
+qubes-gui-common (4.1.0) unstable; urgency=medium
+
+  [ Simon Gaiser ]
+  * New protocol version 1.2
+
+  [ Marek Marczykowski-Górecki ]
+  * Fix indentation
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Wed, 27 Feb 2019 03:53:36 +0100
+
 qubes-gui-common (4.0.2) unstable; urgency=medium
 
   [ Frédéric Pierret ]
