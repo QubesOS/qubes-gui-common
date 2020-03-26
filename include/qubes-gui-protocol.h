@@ -35,13 +35,18 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 2
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 3
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 //arbitrary
 #define MAX_CLIPBOARD_SIZE 65000
 #define MAX_WINDOW_WIDTH 16384
 #define MAX_WINDOW_HEIGHT 6144
+
+//cursor IDs
+#define CURSOR_DEFAULT      0
+#define CURSOR_X11      0x100  // use CURSOR_X11 + XC_* (from X11/cursorfont.h)
+#define CURSOR_X11_MAX  0x19a  // CURSOR_X11 + XC_num_glyphs
 
 //not arbitrary
 #define DUMMY_DRV_FB_BPP 32
@@ -93,6 +98,7 @@ enum {
     MSG_WINDOW_FLAGS,
     MSG_WMCLASS,
     MSG_WINDOW_DUMP,
+    MSG_CURSOR,
     MSG_MAX
 };
 /* VM -> Dom0, Dom0 -> VM */
@@ -232,6 +238,11 @@ struct msg_window_dump_hdr {
     uint32_t width;
     uint32_t height;
     uint32_t bpp;
+};
+
+/* VM -> Dom0 */
+struct msg_cursor {
+    uint32_t cursor;
 };
 
 enum {
