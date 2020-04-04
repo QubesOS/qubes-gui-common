@@ -1,3 +1,13 @@
+qubes-gui-common (4.1.1) unstable; urgency=medium
+
+  [ Frédéric Pierret (fepitre) ]
+  * travis: switch to bionic
+
+  [ Paweł Marczewski ]
+  * Introduce MSG_CURSOR (VM to GUI)
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sat, 04 Apr 2020 05:31:25 +0200
+
 qubes-gui-common (4.1.0) unstable; urgency=medium
 
   [ Simon Gaiser ]
