@@ -19,8 +19,8 @@
  *
  */
 
-#ifndef _QUBES_GUI_PROTOCOL_H
-#define _QUBES_GUI_PROTOCOL_H
+#ifndef QUBES_GUI_PROTOCOL_H
+#define QUBES_GUI_PROTOCOL_H
 
 /* Messagess are described here:
  * https://www.qubes-os.org/doc/gui/
@@ -253,4 +253,4 @@ struct msg_window_dump_grant_refs {
     uint32_t refs[0];
 };
 
-#endif /* _QUBES_GUI_PROTOCOL_H */
+#endif /* QUBES_GUI_PROTOCOL_H */

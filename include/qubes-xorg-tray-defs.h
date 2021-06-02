@@ -19,8 +19,8 @@
  *
  */
 
-#ifndef _QUBES_XORG_TRAY_DEFS_H
-#define _QUBES_XORG_TRAY_DEFS_H
+#ifndef QUBES_XORG_TRAY_DEFS_H
+#define QUBES_XORG_TRAY_DEFS_H
 
 /* Those defines are from freedesktop.org specification (XEMBED protocol), but
  * apparently aren't exposed by any X11 header file */
@@ -40,4 +40,4 @@
 
 #define XEMBED_MAPPED                   (1 << 0)
 
-#endif /* _XORG_TRAY_DEFS_H */
+#endif /* QUBES_XORG_TRAY_DEFS_H */
