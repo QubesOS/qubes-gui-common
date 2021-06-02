@@ -234,7 +234,7 @@ struct shm_cmd {
     uint32_t off;
     uint32_t num_mfn;
     uint32_t domid;
-    uint32_t mfns[0];
+    uint32_t mfns[];
 };
 /* VM -> Dom0 */
 struct msg_wmclass {
