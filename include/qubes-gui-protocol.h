@@ -35,7 +35,7 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 3
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 4
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 //arbitrary
@@ -109,6 +109,8 @@ enum {
     MSG_WMCLASS,
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
+    // Indicates that the GUI daemon has deleted the window with the given ID
+    MSG_DELETE_ID,
     MSG_MAX
 };
 /* VM -> Dom0, Dom0 -> VM */
