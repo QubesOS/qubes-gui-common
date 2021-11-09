@@ -48,16 +48,6 @@ typedef unsigned __int32 uint32_t;
 #define CURSOR_X11      0x100  // use CURSOR_X11 + XC_* (from X11/cursorfont.h)
 #define CURSOR_X11_MAX  0x19a  // CURSOR_X11 + XC_num_glyphs
 
-/* Get the size of an array.  Error out on pointers. */
-#ifdef __GNUC__
-#define QUBES_ARRAY_SIZE(x) (0 * sizeof(struct { \
-    int tried_to_compute_number_of_array_elements_in_a_pointer: \
-        1 - 2*__builtin_types_compatible_p(__typeof__(x), __typeof__(&((x)[0]))); \
-    }) + sizeof(x)/sizeof((x)[0]))
-#else
-#define QUBES_ARRAY_SIZE(x) (sizeof(x)/sizeof((x)[0]))
-#endif
-
 //not arbitrary
 #define DUMMY_DRV_FB_BPP 32
 #define SIZEOF_SHARED_MFN (sizeof(((struct shm_cmd*)0)->mfns[0]))
