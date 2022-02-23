@@ -102,12 +102,16 @@ enum {
     MSG_MAX,
     MSG_KEYPRESS2,
     MSG_BUTTON2,
+    MSG_MOTION2,
 };
 enum {
     FLAG_KEYPRESS_REPEAT=0b1,
 };
 enum {
     FLAG_BUTTON_EMULATED=0b1,
+};
+enum {
+    FLAG_MOTION_EMULATED=0b1,
 };
 /* VM -> Dom0, Dom0 -> VM */
 struct msg_map_info {
@@ -162,12 +166,21 @@ struct msg_button2 {
     uint32_t state;
     uint32_t button;
     uint32_t flags;
-};/* Dom0 -> VM */
+};
+/* Dom0 -> VM */
 struct msg_motion {
     uint32_t x;
     uint32_t y;
     uint32_t state;
     uint32_t is_hint;
+};
+/* Dom0 -> VM */
+struct msg_motion2 {
+    uint32_t x;
+    uint32_t y;
+    uint32_t state;
+    uint32_t is_hint;
+    uint32_t flags;
 };
 /* Dom0 -> VM */
 struct msg_crossing {
