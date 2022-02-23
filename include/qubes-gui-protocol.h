@@ -35,7 +35,7 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 3
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 4
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 //arbitrary
@@ -99,7 +99,15 @@ enum {
     MSG_WMCLASS,
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
-    MSG_MAX
+    MSG_MAX,
+    MSG_KEYPRESS2,
+    MSG_BUTTON2,
+};
+enum {
+    FLAG_KEYPRESS_REPEAT=0b1,
+};
+enum {
+    FLAG_BUTTON_EMULATED=0b1,
 };
 /* VM -> Dom0, Dom0 -> VM */
 struct msg_map_info {
@@ -130,6 +138,15 @@ struct msg_keypress {
     uint32_t keycode;
 };
 /* Dom0 -> VM */
+struct msg_keypress2 {
+    uint32_t type;
+    uint32_t x;
+    uint32_t y;
+    uint32_t state;
+    uint32_t keycode;
+    uint32_t flags;
+};
+/* Dom0 -> VM */
 struct msg_button {
     uint32_t type;
     uint32_t x;
@@ -138,6 +155,14 @@ struct msg_button {
     uint32_t button;
 };
 /* Dom0 -> VM */
+struct msg_button2 {
+    uint32_t type;
+    uint32_t x;
+    uint32_t y;
+    uint32_t state;
+    uint32_t button;
+    uint32_t flags;
+};/* Dom0 -> VM */
 struct msg_motion {
     uint32_t x;
     uint32_t y;
