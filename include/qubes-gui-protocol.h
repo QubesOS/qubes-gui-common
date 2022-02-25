@@ -35,7 +35,7 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 3
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 4
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 //arbitrary
@@ -44,9 +44,11 @@ typedef unsigned __int32 uint32_t;
 #define MAX_WINDOW_HEIGHT 6144
 
 //cursor IDs
-#define CURSOR_DEFAULT      0
-#define CURSOR_X11      0x100  // use CURSOR_X11 + XC_* (from X11/cursorfont.h)
-#define CURSOR_X11_MAX  0x19a  // CURSOR_X11 + XC_num_glyphs
+#define CURSOR_DEFAULT       0
+#define CURSOR_X11      0x0100  // use CURSOR_X11 + XC_* (from X11/cursorfont.h)
+#define CURSOR_X11_MAX  0x019a  // CURSOR_X11 + XC_num_glyphs
+#define CURSOR_SHOW     0x1000
+#define CURSOR_HIDE     0x2000
 
 //not arbitrary
 #define DUMMY_DRV_FB_BPP 32
