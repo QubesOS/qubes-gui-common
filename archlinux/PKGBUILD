@@ -5,7 +5,7 @@
 
 # Maintainer: Olivier Medoc <o_medoc@yahoo.fr>
 pkgname=qubes-vm-gui-common
-pkgver=`cat ../version`
+pkgver=`[ ! -d archlinux ] && cd .. ; cat version`
 pkgrel=1
 epoch=
 pkgdesc="Common files for Qubes GUI - protocol headers."
@@ -32,11 +32,15 @@ md5sums=() #generate with 'makepkg -g'
 
 
 build() {
-  cd $startdir/.. # $startdir is this file's directory
+  cd $startdir # $startdir is this file's directory
+  [ ! -d archlinux ] && cd ..
+  rm $srcdir -rf
+  mkdir -p $srcdir
   cp -r include $srcdir/include
 }
 
 package() {
+  rm $pkgdir -rf
   mkdir -p $pkgdir/usr
   cp -r $srcdir/include $pkgdir/usr/include
 }
