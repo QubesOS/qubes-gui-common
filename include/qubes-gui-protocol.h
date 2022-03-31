@@ -179,7 +179,8 @@ struct msg_focus {
 struct msg_execute {
     char cmd[255];
 };
-/* Dom0 -> VM */
+/* Dom0 -> VM.  Sent immediately after receiving version from agent, and never
+ * sent again.  Has no header. */
 struct msg_xconf {
     uint32_t w;
     uint32_t h;
