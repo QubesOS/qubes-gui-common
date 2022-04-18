@@ -1,0 +1,14 @@
+host:
+  rpm:
+    spec:
+    - rpm_spec/gui-common.spec
+vm:
+  rpm:
+    spec:
+    - rpm_spec/gui-common.spec
+  deb:
+    build:
+    - debian
+  archlinux:
+    build:
+    - archlinux
