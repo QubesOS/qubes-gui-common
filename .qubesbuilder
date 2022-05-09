@@ -1,10 +1,10 @@
 host:
   rpm:
-    spec:
+    build:
     - rpm_spec/gui-common.spec
 vm:
   rpm:
-    spec:
+    build:
     - rpm_spec/gui-common.spec
   deb:
     build:
