@@ -35,8 +35,14 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 3
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 4
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
+
+/* Before this version, MSG_CLIPBOARD_DATA passed the length in the window field */
+#define QUBES_GUID_MIN_CLIPBOARD_DATA_LEN_IN_LEN 0x00010002
+
+/* Minimum version for bidirectional protocol negotiation. */
+#define QUBES_GUID_MIN_BIDIRECTIONAL_NEGOTIATION_VERSION 0x00010004
 
 //arbitrary
 #define MAX_CLIPBOARD_SIZE 65000
@@ -99,7 +105,7 @@ enum {
     MSG_WMCLASS,
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
-    MSG_MAX
+    MSG_MAX,
 };
 /* Agent -> Daemon, Daemon -> Agent */
 struct msg_map_info {
@@ -179,14 +185,23 @@ struct msg_focus {
 struct msg_execute {
     char cmd[255];
 };
-/* Daemon -> Agent.  Sent immediately after receiving version from agent, and never
- * sent again.  Has no header. */
+/* Bidirectional; has no header.  First message sent by the agent.
+ * In version 1.4 and later, it is also the first message sent by the
+ * daemon. */
+struct msg_version {
+    uint32_t version; /* (MAJOR << 16 | MINOR) */
+};
+/* Daemon -> Agent.  Has no header.  In version 1.3 and below, it is
+ * sent immediately after receiving version from agent.  In version 1.4
+ * and later, it is sent immediately after msg_version.
+ */
 struct msg_xconf {
     uint32_t w;
     uint32_t h;
     uint32_t depth;
     uint32_t mem;
 };
+
 /* Agent -> Daemon */
 struct msg_wmname {
     char data[128];
