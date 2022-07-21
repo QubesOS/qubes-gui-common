@@ -99,6 +99,8 @@ enum {
     MSG_WMCLASS,
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
+    MSG_XI_KEYPRESS,
+    MSG_XI_FOCUS,
     MSG_MAX
 };
 /* VM -> Dom0, Dom0 -> VM */
@@ -252,5 +254,36 @@ enum {
 struct msg_window_dump_grant_refs {
     uint32_t refs[0];
 };
+
+/* Dom0 -> VM */
+struct msg_xi_keypress {
+    uint32_t evtype; // press or release
+    uint32_t device;
+    uint32_t detail; // key code
+    uint32_t x; // respective to event window
+    uint32_t y;
+    uint32_t modifier_effective;
+    // reserved for fields that may be useful for non-keyboard devices with keys
+    uint32_t _reserved[7];
+};
+
+/*
+Dom0 -> VM 
+VM -> Dom0
+   only respected when focus is transfered within own VM);
+   elsewise, Dom0 should flash the window requested focus in taskbar,
+   but not transfer focus immediately */
+struct msg_xi_focus {
+    uint32_t evtype; // focusin or out
+    uint32_t device;
+    uint32_t mode; // NotifyNormal
+    uint32_t detail; // NotifyNonilnear
+    uint32_t x;
+    uint32_t y;
+    // mod keys state, useful when focus out,
+    // since this is the only way prevent Ctrl getting stuck
+    uint32_t modifier_effective;
+    uint32_t _reserved[7];
+}
 
 #endif /* QUBES_GUI_PROTOCOL_H */
