@@ -281,9 +281,9 @@ struct msg_xi_focus {
     uint32_t x;
     uint32_t y;
     // mod keys state, useful when focus out,
-    // since this is the only way prevent Ctrl getting stuck
+    // since this is the only way to prevent, say, Alt getting stuck during Alt+Tab
     uint32_t modifier_effective;
     uint32_t _reserved[7];
-}
+};
 
 #endif /* QUBES_GUI_PROTOCOL_H */
