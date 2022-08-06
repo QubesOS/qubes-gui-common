@@ -99,7 +99,7 @@ enum {
     MSG_WMCLASS,
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
-    MSG_XI_KEYPRESS,
+    MSG_XI_KEY,
     MSG_XI_FOCUS,
     MSG_MAX
 };
@@ -256,7 +256,7 @@ struct msg_window_dump_grant_refs {
 };
 
 /* Dom0 -> VM */
-struct msg_xi_keypress {
+struct msg_xi_key {
     uint32_t evtype; // press or release
     uint32_t device;
     uint32_t detail; // key code
