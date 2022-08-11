@@ -35,7 +35,7 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 3
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 5
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 //arbitrary
@@ -99,6 +99,8 @@ enum {
     MSG_WMCLASS,
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
+    MSG_XI_KEY,
+    MSG_XI_FOCUS,
     MSG_MAX
 };
 /* VM -> Dom0, Dom0 -> VM */
@@ -251,6 +253,38 @@ enum {
 
 struct msg_window_dump_grant_refs {
     uint32_t refs[0];
+};
+
+/* Dom0 -> VM */
+struct msg_xi_key {
+    uint32_t evtype; // press or release
+    uint32_t device;
+    uint32_t detail; // key code
+    uint32_t x; // respective to event window
+    uint32_t y;
+    uint32_t modifier_effective;
+    uint32_t flags;
+    // reserved for fields that may be useful for non-keyboard devices with keys
+    uint32_t _reserved[6];
+};
+
+/*
+Dom0 -> VM 
+VM -> Dom0
+   only respected when focus is transfered within own VM);
+   elsewise, Dom0 should flash the window requested focus in taskbar,
+   but not transfer focus immediately */
+struct msg_xi_focus {
+    uint32_t evtype; // focusin or out
+    uint32_t device;
+    uint32_t mode; // NotifyNormal
+    uint32_t detail; // NotifyNonilnear
+    uint32_t x;
+    uint32_t y;
+    // mod keys state, useful when focus out,
+    // since this is the only way to prevent, say, Alt getting stuck during Alt+Tab
+    uint32_t modifier_effective;
+    uint32_t _reserved[7];
 };
 
 #endif /* QUBES_GUI_PROTOCOL_H */
