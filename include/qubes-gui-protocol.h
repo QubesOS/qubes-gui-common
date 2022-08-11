@@ -263,8 +263,9 @@ struct msg_xi_key {
     uint32_t x; // respective to event window
     uint32_t y;
     uint32_t modifier_effective;
+    uint32_t flags;
     // reserved for fields that may be useful for non-keyboard devices with keys
-    uint32_t _reserved[7];
+    uint32_t _reserved[6];
 };
 
 /*
