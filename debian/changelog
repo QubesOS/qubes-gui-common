@@ -1,3 +1,13 @@
+qubes-gui-common (4.2.1) unstable; urgency=medium
+
+  [ Demi Marie Obenour ]
+  * Document that msg_xconf has no header
+  * Replace "VM" with "Agent" and "Dom0" with "Daemon"
+  * Bump version to 1.4
+  * Protocol changes in version 1.5
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Wed, 12 Oct 2022 04:03:08 +0200
+
 qubes-gui-common (4.2.0) unstable; urgency=medium
 
   [ Frédéric Pierret (fepitre) ]
