@@ -1,3 +1,30 @@
+qubes-gui-common (4.2.0) unstable; urgency=medium
+
+  [ Frédéric Pierret (fepitre) ]
+  * Update travis
+  * Add .gitlab-ci.yml
+
+  [ Demi Marie Obenour ]
+  * Avoid using reserved identifiers for macros
+  * Add a QUBES_ARRAY_SIZE macro
+  * Use a flexible array member in struct shm_cmd
+
+  [ Marek Marczykowski-Górecki ]
+  * Revert "Add a QUBES_ARRAY_SIZE macro"
+  * ci: build on windows too
+
+  [ Frédéric Pierret (fepitre) ]
+  * Drop Travis CI
+  * Add Qubes Builder v2 integration
+  * .qubesbuilder: replace 'spec' by 'build'
+
+  [ Demi Marie Obenour ]
+  * Document that msg_xconf has no header
+  * Replace "VM" with "Agent" and "Dom0" with "Daemon"
+  * Bump version to 1.4
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Wed, 12 Oct 2022 04:01:04 +0200
+
 qubes-gui-common (4.1.1) unstable; urgency=medium
 
   [ Frédéric Pierret (fepitre) ]
