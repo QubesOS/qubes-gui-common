@@ -35,8 +35,14 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 3
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 4
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
+
+/* Before this version, MSG_CLIPBOARD_DATA passed the length in the window field */
+#define QUBES_GUID_MIN_CLIPBOARD_DATA_LEN_IN_LEN 0x00010002
+
+/* Minimum version for bidirectional protocol negotiation. */
+#define QUBES_GUID_MIN_BIDIRECTIONAL_NEGOTIATION_VERSION 0x00010004
 
 //arbitrary
 #define MAX_CLIPBOARD_SIZE 65000
@@ -99,15 +105,15 @@ enum {
     MSG_WMCLASS,
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
-    MSG_MAX
+    MSG_MAX,
 };
-/* VM -> Dom0, Dom0 -> VM */
+/* Agent -> Daemon, Daemon -> Agent */
 struct msg_map_info {
     uint32_t transient_for;
     uint32_t override_redirect;
 };
 
-/* VM -> Dom0 */
+/* Agent -> Daemon */
 struct msg_create {
     uint32_t x;
     uint32_t y;
@@ -116,12 +122,12 @@ struct msg_create {
     uint32_t parent;
     uint32_t override_redirect;
 };
-/* Dom0 -> VM, obsolete */
+/* Daemon -> Agent, obsolete */
 struct msg_resize {
     uint32_t width;
     uint32_t height;    /* size of image */
 };
-/* Dom0 -> VM */
+/* Daemon -> Agent */
 struct msg_keypress {
     uint32_t type;
     uint32_t x;
@@ -129,7 +135,7 @@ struct msg_keypress {
     uint32_t state;
     uint32_t keycode;
 };
-/* Dom0 -> VM */
+/* Daemon -> Agent */
 struct msg_button {
     uint32_t type;
     uint32_t x;
@@ -137,14 +143,14 @@ struct msg_button {
     uint32_t state;
     uint32_t button;
 };
-/* Dom0 -> VM */
+/* Daemon -> Agent */
 struct msg_motion {
     uint32_t x;
     uint32_t y;
     uint32_t state;
     uint32_t is_hint;
 };
-/* Dom0 -> VM */
+/* Daemon -> Agent */
 struct msg_crossing {
     uint32_t type;
     uint32_t x;
@@ -154,7 +160,7 @@ struct msg_crossing {
     uint32_t detail;
     uint32_t focus;
 };
-/* VM -> Dom0, Dom0 -> VM */
+/* Agent -> Daemon, Daemon -> Agent */
 struct msg_configure {
     uint32_t x;
     uint32_t y;
@@ -162,39 +168,49 @@ struct msg_configure {
     uint32_t height;
     uint32_t override_redirect;
 };
-/* VM -> Dom0 */
+/* Agent -> Daemon */
 struct msg_shmimage {
     uint32_t x;
     uint32_t y;
     uint32_t width;
     uint32_t height;
 };
-/* Dom0 -> VM */
+/* Daemon -> Agent */
 struct msg_focus {
     uint32_t type;
     uint32_t mode;
     uint32_t detail;
 };
-/* Dom0 -> VM */
+/* Daemon -> Agent */
 struct msg_execute {
     char cmd[255];
 };
-/* Dom0 -> VM */
+/* Bidirectional; has no header.  First message sent by the agent.
+ * In version 1.4 and later, it is also the first message sent by the
+ * daemon. */
+struct msg_version {
+    uint32_t version; /* (MAJOR << 16 | MINOR) */
+};
+/* Daemon -> Agent.  Has no header.  In version 1.3 and below, it is
+ * sent immediately after receiving version from agent.  In version 1.4
+ * and later, it is sent immediately after msg_version.
+ */
 struct msg_xconf {
     uint32_t w;
     uint32_t h;
     uint32_t depth;
     uint32_t mem;
 };
-/* VM -> Dom0 */
+
+/* Agent -> Daemon */
 struct msg_wmname {
     char data[128];
 };
-/* Dom0 -> VM */
+/* Daemon -> Agent */
 struct msg_keymap_notify {
     char keys[32];
 };
-/* VM -> Dom0 */
+/* Agent -> Daemon */
 struct msg_window_hints {
     uint32_t flags;
     uint32_t min_width;
@@ -206,7 +222,7 @@ struct msg_window_hints {
     uint32_t base_width;
     uint32_t base_height;
 };
-/* VM -> Dom0, Dom0 -> VM */
+/* Agent -> Daemon, Daemon -> Agent */
 struct msg_window_flags {
     uint32_t flags_set;
     uint32_t flags_unset;
@@ -215,7 +231,7 @@ struct msg_window_flags {
 #define WINDOW_FLAG_DEMANDS_ATTENTION   (1<<1)
 #define WINDOW_FLAG_MINIMIZE            (1<<2)
 
-/* VM -> Dom0, deprecated */
+/* Agent -> Daemon, deprecated */
 struct shm_cmd {
     uint32_t shmid;
     uint32_t width;
@@ -226,13 +242,13 @@ struct shm_cmd {
     uint32_t domid;
     uint32_t mfns[];
 };
-/* VM -> Dom0 */
+/* Agent -> Daemon */
 struct msg_wmclass {
     char res_class[64];
     char res_name[64];
 };
 
-/* VM -> Dom0, hdr followed by msg_window_dump_${hdr.type} */
+/* Agent -> Daemon, hdr followed by msg_window_dump_${hdr.type} */
 struct msg_window_dump_hdr {
     uint32_t type;
     uint32_t width;
@@ -240,7 +256,7 @@ struct msg_window_dump_hdr {
     uint32_t bpp;
 };
 
-/* VM -> Dom0 */
+/* Agent -> Daemon */
 struct msg_cursor {
     uint32_t cursor;
 };
