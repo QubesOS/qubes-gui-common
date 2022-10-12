@@ -35,7 +35,7 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 4
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 5
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 /* Before this version, MSG_CLIPBOARD_DATA passed the length in the window field */
@@ -43,6 +43,9 @@ typedef unsigned __int32 uint32_t;
 
 /* Minimum version for bidirectional protocol negotiation. */
 #define QUBES_GUID_MIN_BIDIRECTIONAL_NEGOTIATION_VERSION 0x00010004
+
+/* Minimum version for bidirectional MSG_DESTROY */
+#define QUBES_GUID_MIN_BIDIRECTIONAL_MSG_DESTROY 0x00010005
 
 //arbitrary
 #define MAX_CLIPBOARD_SIZE 65000
@@ -87,6 +90,9 @@ enum {
     MSG_FOCUS,
     MSG_RESIZE,
     MSG_CREATE,
+    /** Destroy a window.  In version 1.4 and below, it is only sent by
+     * the agent.  In version 1.5 and above, it is sent by the daemon to
+     * acknowledge window destruction.  No body. */
     MSG_DESTROY,
     MSG_MAP,
     MSG_UNMAP, // 133
