@@ -148,8 +148,8 @@ struct msg_map_info {
 
 /* Agent -> Daemon */
 struct msg_create {
-    uint32_t x;
-    uint32_t y;
+    int32_t x;
+    int32_t y;
     uint32_t width;
     uint32_t height;    /* size of image */
     uint32_t parent;
@@ -163,31 +163,31 @@ struct msg_resize {
 /* Daemon -> Agent */
 struct msg_keypress {
     uint32_t type;
-    uint32_t x;
-    uint32_t y;
+    int32_t x;
+    int32_t y;
     uint32_t state;
     uint32_t keycode;
 } __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_button {
     uint32_t type;
-    uint32_t x;
-    uint32_t y;
+    int32_t x;
+    int32_t y;
     uint32_t state;
     uint32_t button;
 } __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_motion {
-    uint32_t x;
-    uint32_t y;
+    int32_t x;
+    int32_t y;
     uint32_t state;
     uint32_t is_hint;
 } __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_crossing {
     uint32_t type;
-    uint32_t x;
-    uint32_t y;
+    int32_t x;
+    int32_t y;
     uint32_t state;
     uint32_t mode;
     uint32_t detail;
@@ -195,16 +195,16 @@ struct msg_crossing {
 } __attribute__((may_alias));
 /* Agent -> Daemon, Daemon -> Agent */
 struct msg_configure {
-    uint32_t x;
-    uint32_t y;
+    int32_t x;
+    int32_t y;
     uint32_t width;
     uint32_t height;
     uint32_t override_redirect;
 } __attribute__((may_alias));
 /* Agent -> Daemon */
 struct msg_shmimage {
-    uint32_t x;
-    uint32_t y;
+    int32_t x;
+    int32_t y;
     uint32_t width;
     uint32_t height;
 } __attribute__((may_alias));
