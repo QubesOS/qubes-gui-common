@@ -143,7 +143,7 @@ enum {
 struct msg_map_info {
     uint32_t transient_for;
     uint32_t override_redirect;
-};
+} __attribute__((may_alias));
 
 /* Agent -> Daemon */
 struct msg_create {
@@ -153,12 +153,12 @@ struct msg_create {
     uint32_t height;    /* size of image */
     uint32_t parent;
     uint32_t override_redirect;
-};
+} __attribute__((may_alias));
 /* Daemon -> Agent, obsolete */
 struct msg_resize {
     uint32_t width;
     uint32_t height;    /* size of image */
-};
+} __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_keypress {
     uint32_t type;
@@ -166,7 +166,7 @@ struct msg_keypress {
     uint32_t y;
     uint32_t state;
     uint32_t keycode;
-};
+} __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_button {
     uint32_t type;
@@ -174,14 +174,14 @@ struct msg_button {
     uint32_t y;
     uint32_t state;
     uint32_t button;
-};
+} __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_motion {
     uint32_t x;
     uint32_t y;
     uint32_t state;
     uint32_t is_hint;
-};
+} __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_crossing {
     uint32_t type;
@@ -191,7 +191,7 @@ struct msg_crossing {
     uint32_t mode;
     uint32_t detail;
     uint32_t focus;
-};
+} __attribute__((may_alias));
 /* Agent -> Daemon, Daemon -> Agent */
 struct msg_configure {
     uint32_t x;
@@ -199,30 +199,30 @@ struct msg_configure {
     uint32_t width;
     uint32_t height;
     uint32_t override_redirect;
-};
+} __attribute__((may_alias));
 /* Agent -> Daemon */
 struct msg_shmimage {
     uint32_t x;
     uint32_t y;
     uint32_t width;
     uint32_t height;
-};
+} __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_focus {
     uint32_t type;
     uint32_t mode;
     uint32_t detail;
-};
+} __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_execute {
     char cmd[255];
-};
+} __attribute__((may_alias));
 /* Bidirectional; has no header.  First message sent by the agent.
  * In version 1.4 and later, it is also the first message sent by the
  * daemon. */
 struct msg_version {
     uint32_t version; /* (MAJOR << 16 | MINOR) */
-};
+} __attribute__((may_alias));
 /* Daemon -> Agent.  Has no header.  In version 1.3 and below, it is
  * sent immediately after receiving version from agent.  In version 1.4
  * and later, it is sent immediately after msg_version.
@@ -232,16 +232,16 @@ struct msg_xconf {
     uint32_t h;
     uint32_t depth;
     uint32_t mem;
-};
+} __attribute__((may_alias));
 
 /* Agent -> Daemon */
 struct msg_wmname {
     char data[128];
-};
+} __attribute__((may_alias));
 /* Daemon -> Agent */
 struct msg_keymap_notify {
     char keys[32];
-};
+} __attribute__((may_alias));
 /* Agent -> Daemon */
 struct msg_window_hints {
     uint32_t flags;
@@ -253,12 +253,12 @@ struct msg_window_hints {
     uint32_t height_inc;
     uint32_t base_width;
     uint32_t base_height;
-};
+} __attribute__((may_alias));
 /* Agent -> Daemon, Daemon -> Agent */
 struct msg_window_flags {
     uint32_t flags_set;
     uint32_t flags_unset;
-};
+} __attribute__((may_alias));
 #define WINDOW_FLAG_FULLSCREEN          (1<<0)
 #define WINDOW_FLAG_DEMANDS_ATTENTION   (1<<1)
 #define WINDOW_FLAG_MINIMIZE            (1<<2)
@@ -273,12 +273,12 @@ struct shm_cmd {
     uint32_t num_mfn;
     uint32_t domid;
     uint32_t mfns[];
-};
+} __attribute__((may_alias));
 /* Agent -> Daemon */
 struct msg_wmclass {
     char res_class[64];
     char res_name[64];
-};
+} __attribute__((may_alias));
 
 /* Agent -> Daemon, hdr followed by msg_window_dump_${hdr.type} */
 struct msg_window_dump_hdr {
@@ -286,12 +286,12 @@ struct msg_window_dump_hdr {
     uint32_t width;
     uint32_t height;
     uint32_t bpp;
-};
+} __attribute__((may_alias));
 
 /* Agent -> Daemon */
 struct msg_cursor {
     uint32_t cursor;
-};
+} __attribute__((may_alias));
 
 enum {
     WINDOW_DUMP_TYPE_GRANT_REFS
