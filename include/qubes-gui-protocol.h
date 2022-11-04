@@ -86,8 +86,8 @@ typedef unsigned __int32 uint32_t;
 //not arbitrary
 #define DUMMY_DRV_FB_BPP 32
 #define SIZEOF_SHARED_MFN (sizeof(((struct shm_cmd*)0)->mfns[0]))
-#define MAX_WINDOW_MEM (MAX_WINDOW_HEIGHT*MAX_WINDOW_WIDTH*(DUMMY_DRV_FB_BPP/8))
-#define NUM_PAGES(x) ((x+4095)>>12)
+#define MAX_WINDOW_MEM ((size_t)(MAX_WINDOW_HEIGHT*MAX_WINDOW_WIDTH*(DUMMY_DRV_FB_BPP/8)))
+#define NUM_PAGES(x) (((x)+4095)>>12)
 //finally, used stuff
 #define MAX_MFN_COUNT NUM_PAGES(MAX_WINDOW_MEM)
 #define SHM_CMD_NUM_PAGES NUM_PAGES(MAX_MFN_COUNT*SIZEOF_SHARED_MFN+sizeof(struct shm_cmd))
@@ -96,6 +96,7 @@ typedef unsigned __int32 uint32_t;
 
 #define MAX_GRANT_REFS_COUNT NUM_PAGES(MAX_WINDOW_MEM)
 #define SIZEOF_GRANT_REF sizeof(uint32_t)
+#define QUBES_MAX_MSG_WINDOW_DUMP_LEN (MAX_GRANT_REFS_COUNT * SIZEOF_GRANT_REF + sizeof(struct msg_hdr) + sizeof(struct msg_window_dump_hdr))
 
 struct msg_hdr {
     uint32_t type;
