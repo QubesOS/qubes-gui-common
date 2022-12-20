@@ -26,6 +26,32 @@
  * https://www.qubes-os.org/doc/gui/
  */
 
+/*
+ * Protocol version history:
+ *
+ * 1.0:
+ *  - initial version allowing newer gui-daemon connecting to older gui-agent
+ * 1.1:
+ *  - introduce MSG_WMCLASS message
+ * 1.2:
+ *  - introduce MSG_WINDOW_DUMP
+ *  - introduce WINDOW_DUMP_TYPE_GRANT_REFS dump type
+ *  - deprecate MSG_MFNDUMP (existing implementations can still use it)
+ * 1.3:
+ *  - introduce MSG_CURSOR
+ * 1.4:
+ *  - bidirectional protocol negotiation: older gui-daemon can now talk to
+ *    newer gui-agent
+ *  - msg_version is sent by the daemon, after receiving version >= 1.4 from
+ *    the agent
+ * 1.5:
+ *  - gui-daemon sends MSG_DESTROY to acknowledge finishing MSG_DESTROY
+ *    processing; it allows the agent to distinguish messages related to
+ *    different windows in case of window ID reuse
+ *
+ */
+
+
 #ifdef WINNT
 typedef unsigned __int32 uint32_t;
 #endif
