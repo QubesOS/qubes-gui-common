@@ -48,7 +48,9 @@
  *  - gui-daemon sends MSG_DESTROY to acknowledge finishing MSG_DESTROY
  *    processing; it allows the agent to distinguish messages related to
  *    different windows in case of window ID reuse
- *
+ * 1.6:
+ *  - strict validation of message lengths: messages from agent with incorrect
+ *    lengths are now a protocol error
  */
 
 
@@ -61,7 +63,7 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 5
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 6
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 /* Before this version, MSG_CLIPBOARD_DATA passed the length in the window field */
