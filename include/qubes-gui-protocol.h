@@ -51,6 +51,10 @@
  * 1.6:
  *  - strict validation of message lengths: messages from agent with incorrect
  *    lengths are now a protocol error
+ * 1.7:
+ *  - gui-daemon sends MSG_WINDOW_DUMP_ACK to acknowledge finishing
+ *    MSG_WINDOW_DUMP processing; this allows agent to know when it
+ *    can safely unmap a window's grants
  */
 
 
@@ -140,6 +144,7 @@ enum {
     MSG_WMCLASS,
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
+    MSG_WINDOW_DUMP_ACK,
     MSG_MAX,
 };
 /* Agent -> Daemon, Daemon -> Agent */
