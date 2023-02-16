@@ -1,3 +1,17 @@
+qubes-gui-common (4.2.2) unstable; urgency=medium
+
+  [ Marek Marczykowski-Górecki ]
+  * Add initial version history
+
+  [ Demi Marie Obenour ]
+  * Mark protocol structs as may-alias
+  * Add a macro for maximum size of MSG_WINDOW_DUMP.
+  * X and Y coordinates are signed
+  * Document changes in v1.6
+  * Document changes in v1.7
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Thu, 16 Feb 2023 02:57:35 +0100
+
 qubes-gui-common (4.2.1) unstable; urgency=medium
 
   [ Demi Marie Obenour ]
