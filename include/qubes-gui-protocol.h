@@ -79,6 +79,9 @@ typedef unsigned __int32 uint32_t;
 /* Minimum version for bidirectional MSG_DESTROY */
 #define QUBES_GUID_MIN_BIDIRECTIONAL_MSG_DESTROY 0x00010005
 
+/* Minimum version for MSG_WINDOW_DUMP_ACK */
+#define QUBES_GUID_MIN_MSG_WINDOW_DUMP_ACK 0x00010007
+
 //arbitrary
 #define MAX_CLIPBOARD_SIZE 65000
 #define MAX_WINDOW_WIDTH 16384
