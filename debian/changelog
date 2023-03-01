@@ -1,3 +1,10 @@
+qubes-gui-common (4.2.3) unstable; urgency=medium
+
+  * Add QUBES_GUID_MIN_MSG_WINDOW_DUMP_ACK
+  * Actually bump protocol version to 1.7
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Wed, 01 Mar 2023 14:10:24 +0100
+
 qubes-gui-common (4.2.2) unstable; urgency=medium
 
   [ Marek Marczykowski-Górecki ]
