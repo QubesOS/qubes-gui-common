@@ -1,0 +1,18 @@
+# Maintainer: Frédéric Pierret (fepitre) <frederic@invisiblethingslab.com>
+
+pkgname=qubes-vm-gui-common
+pkgver=@VERSION@
+pkgrel=@REL@
+pkgdesc="Common files for Qubes GUI - protocol headers."
+arch=("x86_64")
+url="http://qubes-os.org/"
+license=('GPL')
+_pkgnvr="${pkgname}-${pkgver}-${pkgrel}"
+source=("${_pkgnvr}.tar.gz")
+sha256sums=(SKIP)
+
+package() {
+    cd "${_pkgnvr}"
+    mkdir -p $pkgdir/usr/include
+    cp include/*.h $pkgdir/usr/include/
+}
