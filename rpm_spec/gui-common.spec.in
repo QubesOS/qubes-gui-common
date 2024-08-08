@@ -30,6 +30,8 @@ Group:		Qubes
 License:	GPL
 URL:		http://www.qubes-os.org
 
+BuildArch: noarch
+
 Source0: %{name}-%{version}.tar.gz
 
 %description
