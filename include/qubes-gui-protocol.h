@@ -55,6 +55,9 @@
  *  - gui-daemon sends MSG_WINDOW_DUMP_ACK to acknowledge finishing
  *    MSG_WINDOW_DUMP processing; this allows agent to know when it
  *    can safely unmap a window's grants
+ * 1.8:
+ *  - gui-agent can now ack a MSG_CONFIGURE and send its own MSG_CONFIGURE
+ *    in a single message.
  */
 
 
@@ -67,7 +70,7 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 7
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 8
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 /* Before this version, MSG_CLIPBOARD_DATA passed the length in the window field */
@@ -148,6 +151,7 @@ enum {
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
     MSG_WINDOW_DUMP_ACK,
+    MSG_CONFIGURE_WITH_ACK,
     MSG_MAX,
 };
 /* Agent -> Daemon, Daemon -> Agent */
@@ -310,6 +314,18 @@ enum {
 
 struct msg_window_dump_grant_refs {
     uint32_t refs[0];
+};
+
+/* Agent -> Daemon */
+struct msg_configure_with_ack {
+    int32_t old_x;
+    int32_t old_y;
+    uint32_t old_width;
+    uint32_t old_height;
+    int32_t x;
+    int32_t y;
+    uint32_t width;
+    uint32_t height;
 };
 
 #endif /* QUBES_GUI_PROTOCOL_H */
