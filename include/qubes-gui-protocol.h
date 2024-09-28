@@ -55,6 +55,9 @@
  *  - gui-daemon sends MSG_WINDOW_DUMP_ACK to acknowledge finishing
  *    MSG_WINDOW_DUMP processing; this allows agent to know when it
  *    can safely unmap a window's grants
+ * 1.8:
+ *  - gui-daemon uses IOCTL_GNTDEV_SET_UNMAP_NOTIFY to notify the agent
+ *    that a window's grants have actually been unmapped.
  */
 
 
@@ -305,11 +308,17 @@ struct msg_cursor {
 } __attribute__((may_alias));
 
 enum {
-    WINDOW_DUMP_TYPE_GRANT_REFS
+    WINDOW_DUMP_TYPE_GRANT_REFS,
+    WINDOW_DUMP_TYPE_GRANT_REFS_NOTIFY,
 };
 
 struct msg_window_dump_grant_refs {
     uint32_t refs[0];
+};
+
+struct msg_window_dump_grant_refs_notify {
+    uint32_t evtchn_port;
+    uint32_t refs[];
 };
 
 #endif /* QUBES_GUI_PROTOCOL_H */
