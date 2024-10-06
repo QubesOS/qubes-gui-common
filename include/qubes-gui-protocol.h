@@ -55,6 +55,8 @@
  *  - gui-daemon sends MSG_WINDOW_DUMP_ACK to acknowledge finishing
  *    MSG_WINDOW_DUMP processing; this allows agent to know when it
  *    can safely unmap a window's grants
+ * 1.8:
+ *  - configurable maximum clipboard size per VM and/or GUIVM.
  */
 
 
@@ -67,7 +69,7 @@ typedef unsigned __int32 uint32_t;
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 7
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 8
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 /* Before this version, MSG_CLIPBOARD_DATA passed the length in the window field */
@@ -82,8 +84,22 @@ typedef unsigned __int32 uint32_t;
 /* Minimum version for MSG_WINDOW_DUMP_ACK */
 #define QUBES_GUID_MIN_MSG_WINDOW_DUMP_ACK 0x00010007
 
+/* Minimum version for (up to) 4x sized clipboard */
+#define QUBES_GUID_MIN_CLIPBOARD_4X 0x00010008
+
 //arbitrary
-#define MAX_CLIPBOARD_SIZE 65000
+#define MAX_CLIPBOARD_SIZE 65000              // protocol 1.7 or older
+
+/*  protocol 1.8 notes:
+ *  vmside could send up to 256KB of clipboard data. If vmside clipboard is over
+ *  this limit, vmside will send one byte over it to trigger rejection on xside.
+ *  xside actual maximum (from 256 to 256000 bytes) is configurable per GUIVM
+ *  and/or per VM. One byte over VM limit is a sign for a visual notification.
+ *  Anything over 256001 is a sign of malformed packet & misbehaving VM. */
+#define MAX_CLIPBOARD_BUFFER_SIZE 256000
+#define MIN_CLIPBOARD_BUFFER_SIZE 256         // nice for KeePassXC qubes which will send usernames & passwords.
+#define DEFAULT_CLIPBOARD_BUFFER_SIZE 64000   // 1000 bytes less than protocol v 1.7 value. so it behaves nicely with older vmside agent
+
 #define MAX_WINDOW_WIDTH 16384
 #define MAX_WINDOW_HEIGHT 6144
 
