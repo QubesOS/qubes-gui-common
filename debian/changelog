@@ -1,3 +1,10 @@
+qubes-gui-common (4.3.0) unstable; urgency=medium
+
+  [ Ali Mirjamali ]
+  * Increase maximum clipboard allowed size to 256KB
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Mon, 21 Oct 2024 17:35:59 +0200
+
 qubes-gui-common (4.2.5) unstable; urgency=medium
 
   * rpm: mark package as noarch
