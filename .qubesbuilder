@@ -12,3 +12,9 @@ vm:
   archlinux:
     build:
     - archlinux
+  windows:
+    build:
+    - dummy
+    inc:
+    - include/qubes-gui-protocol.h
+    - include/qubes-xorg-tray-defs.h
