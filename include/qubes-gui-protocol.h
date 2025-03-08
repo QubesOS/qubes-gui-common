@@ -59,13 +59,12 @@
  *  - configurable maximum clipboard size per VM and/or GUIVM.
  */
 
+#ifdef _WIN32
+// TODO: fix properly for Windows
+#define __attribute__(x)
+#endif
 
-#ifdef WINNT
-typedef unsigned __int32 uint32_t;
-#endif
-#ifndef WINNT
 #include <stdint.h>
-#endif
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
