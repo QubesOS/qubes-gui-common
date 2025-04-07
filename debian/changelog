@@ -1,3 +1,11 @@
+qubes-gui-common (4.3.1) unstable; urgency=medium
+
+  [ Rafał Wojdyła ]
+  * Fix for Windows compilers
+  * windows: support builder v2
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Mon, 07 Apr 2025 11:57:58 +0200
+
 qubes-gui-common (4.3.0) unstable; urgency=medium
 
   [ Ali Mirjamali ]
