@@ -57,6 +57,8 @@
  *    can safely unmap a window's grants
  * 1.8:
  *  - configurable maximum clipboard size per VM and/or GUIVM.
+ * 1.9:
+ *  - introduce MSG_CLIPBOARD_DATA_IMAGE, a raw RGBA bitmap
  */
 
 #ifdef _WIN32
@@ -68,7 +70,7 @@
 /* version of protocol described in this file, used as gui-daemon protocol
  * version; specific agent defines own version which them support */
 #define QUBES_GUID_PROTOCOL_VERSION_MAJOR 1
-#define QUBES_GUID_PROTOCOL_VERSION_MINOR 8
+#define QUBES_GUID_PROTOCOL_VERSION_MINOR 9
 #define QUBES_GUID_PROTOCOL_VERSION (QUBES_GUID_PROTOCOL_VERSION_MAJOR << 16 | QUBES_GUID_PROTOCOL_VERSION_MINOR)
 
 /* Before this version, MSG_CLIPBOARD_DATA passed the length in the window field */
@@ -86,6 +88,9 @@
 /* Minimum version for (up to) 4x sized clipboard */
 #define QUBES_GUID_MIN_CLIPBOARD_4X 0x00010008
 
+/* Minimum version for MSG_CLIPBOARD_DATA_IMAGE */
+#define QUBES_GUID_MIN_CLIPBOARD_IMAGE 0x00010009
+
 //arbitrary
 #define MAX_CLIPBOARD_SIZE 65000              // protocol 1.7 or older
 
@@ -98,6 +103,16 @@
 #define MAX_CLIPBOARD_BUFFER_SIZE 256000
 #define MIN_CLIPBOARD_BUFFER_SIZE 256         // nice for KeePassXC qubes which will send usernames & passwords.
 #define DEFAULT_CLIPBOARD_BUFFER_SIZE 64000   // 1000 bytes less than protocol v 1.7 value. so it behaves nicely with older vmside agent
+
+/* protocol 1.9: clipboard images are raw RGBA, limited separately from text.
+ * The default is small on purpose, about a 1000x1000 image. The maximum is
+ * enough for a 1920x1080 screenshot (8294400 bytes). A qube that needs more
+ * gets it from the gui-max-clipboard-image-size feature. */
+#define MAX_CLIPBOARD_IMAGE_WIDTH 4096
+#define MAX_CLIPBOARD_IMAGE_HEIGHT 4096
+#define MAX_CLIPBOARD_IMAGE_BUFFER_SIZE 16000000
+#define MIN_CLIPBOARD_IMAGE_BUFFER_SIZE 4096
+#define DEFAULT_CLIPBOARD_IMAGE_BUFFER_SIZE 4000000
 
 #define MAX_WINDOW_WIDTH 16384
 #define MAX_WINDOW_HEIGHT 6144
@@ -163,6 +178,7 @@ enum {
     MSG_WINDOW_DUMP,
     MSG_CURSOR,
     MSG_WINDOW_DUMP_ACK,
+    MSG_CLIPBOARD_DATA_IMAGE,
     MSG_MAX,
 };
 /* Agent -> Daemon, Daemon -> Agent */
@@ -317,6 +333,12 @@ struct msg_window_dump_hdr {
 /* Agent -> Daemon */
 struct msg_cursor {
     uint32_t cursor;
+} __attribute__((may_alias));
+
+/* Agent -> Daemon, Daemon -> Agent, hdr followed by width*height*4 bytes RGBA */
+struct msg_clipboard_image {
+    uint32_t width;
+    uint32_t height;
 } __attribute__((may_alias));
 
 enum {
