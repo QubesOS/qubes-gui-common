@@ -335,10 +335,12 @@ struct msg_cursor {
     uint32_t cursor;
 } __attribute__((may_alias));
 
-/* Agent -> Daemon, Daemon -> Agent, hdr followed by width*height*4 bytes RGBA */
+/* Agent -> Daemon, Daemon -> Agent, hdr followed by width*height pixels,
+ * 4 bytes each in memory order R, G, B, A */
 struct msg_clipboard_image {
     uint32_t width;
     uint32_t height;
+    uint32_t pixels[];
 } __attribute__((may_alias));
 
 enum {
