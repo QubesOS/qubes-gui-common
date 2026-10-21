@@ -105,14 +105,15 @@
 #define DEFAULT_CLIPBOARD_BUFFER_SIZE 64000   // 1000 bytes less than protocol v 1.7 value. so it behaves nicely with older vmside agent
 
 /* protocol 1.9: clipboard images are raw RGBA, limited separately from text.
- * The default is small on purpose, a 1024x1024 image. The maximum is
- * enough for a 1920x1080 screenshot (8294400 bytes). A qube that needs more
- * gets it from the gui-max-clipboard-image-size feature. */
+ * Buffer sizes are width * height * 4, one byte per RGBA channel. The
+ * maximum is a 4096x4096 image, the default 32 MiB covers a 4k screenshot.
+ * A qube that needs more gets it from the gui-max-clipboard-image-size
+ * feature. */
 #define MAX_CLIPBOARD_IMAGE_WIDTH 4096
 #define MAX_CLIPBOARD_IMAGE_HEIGHT 4096
-#define MAX_CLIPBOARD_IMAGE_BUFFER_SIZE 16777216   // 16 MiB
+#define MAX_CLIPBOARD_IMAGE_BUFFER_SIZE (MAX_CLIPBOARD_IMAGE_WIDTH * MAX_CLIPBOARD_IMAGE_HEIGHT * 4)
 #define MIN_CLIPBOARD_IMAGE_BUFFER_SIZE 0
-#define DEFAULT_CLIPBOARD_IMAGE_BUFFER_SIZE 4194304   // 4 MiB
+#define DEFAULT_CLIPBOARD_IMAGE_BUFFER_SIZE 33554432   // 32 MiB
 
 #define MAX_WINDOW_WIDTH 16384
 #define MAX_WINDOW_HEIGHT 6144
