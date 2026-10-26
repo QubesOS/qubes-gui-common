@@ -1,3 +1,16 @@
+qubes-gui-common (4.4.0) unstable; urgency=medium
+
+  [ Frédéric Pierret (fepitre) ]
+  * gui-protocol: add MSG_CLIPBOARD_DATA_IMAGE for protocol 1.9
+  * ci: update build for r4.3 and drop old versions
+  * gui-protocol: add pixel data to clipboard image message
+  * gui-protocol: use MiB for clipboard image limits
+  * gui-protocol: allow zero clipboard image limit
+  * ci: use devel templates
+  * gui-protocol: compute image buffer from size
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Mon, 26 Oct 2026 14:11:11 +0100
+
 qubes-gui-common (4.3.1) unstable; urgency=medium
 
   [ Rafał Wojdyła ]
